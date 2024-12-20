@@ -6,7 +6,7 @@ const UUID = process.env.UUID || 'cc014ce3-17d8-42de-aa21-486cff6f7491'; //若�
 const NEZHA_SERVER = process.env.NEZHA_SERVER || 'nz.f4i.cn';     
 const NEZHA_PORT = process.env.NEZHA_PORT || '5555';                     // 哪吒端口为{443,8443,2096,2087,2083,2053}其中之一开启tls
 const NEZHA_KEY = process.env.NEZHA_KEY || '';   // 没用哪吒，把这个参数空着
-const ARGO_DOMAIN = process.env.ARGO_DOMAIN || 'cheroeo1.hudfg.us.kg';     // 建议使用token，argo端口8080，cf后台设置需对应,使用json需上传json和yml文件至files目录
+const ARGO_DOMAIN = process.env.ARGO_DOMAIN || 'che1.hudfg.us.kg';     // 建议使用token，argo端口8080，cf后台设置需对应,使用json需上传json和yml文件至files目录
 const ARGO_AUTH = process.env.ARGO_AUTH || 'eyJhIjoiMGE3MzY2OTU1NjZmMmZkNzBmN2IyMmI1ZTBiODY0OTgiLCJ0IjoiNzE2ZTA4OWMtMzZjYy00MDc0LTk3NTUtMWYzMmNhNTNiMGQ0IiwicyI6IlpXRXhZV0kwWkRFdE5qaG1OQzAwTkRabExXSTNaVGN0T0RVMk5EY3lZak00TWpabCJ9';
 const CFIP = process.env.CFIP || 'na.ma';
 const NAME = process.env.NAME || 'Choreo';
@@ -23,7 +23,7 @@ const metaInfo = execSync(
 const ISP = metaInfo.trim();
 
 // sub subscription
-app.get('/sub', (req, res) => {
+app.get('/sub2', (req, res) => {
   const VMESS = { v: '2', ps: `${NAME}-${ISP}`, add: CFIP, port: '443', id: UUID, aid: '0', scy: 'none', net: 'ws', type: 'none', host: ARGO_DOMAIN, path: '/vmess?ed=2048', tls: 'tls', sni: ARGO_DOMAIN, alpn: '' };
   const vlessURL = `vless://${UUID}@${CFIP}:443?encryption=none&security=tls&sni=${ARGO_DOMAIN}&type=ws&host=${ARGO_DOMAIN}&path=%2Fvless?ed=2048#${NAME}-${ISP}`;
   const vmessURL = `vmess://${Buffer.from(JSON.stringify(VMESS)).toString('base64')}`;
